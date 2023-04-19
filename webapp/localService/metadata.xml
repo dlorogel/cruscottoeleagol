@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCRUSCOTTOELEAGOL_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="HEADERPOS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Num"/>
+                    <PropertyRef Name="Numpos"/>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Budat"/>
+                </Key>
+                <Property Name="Num" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Document Number"/>
+                <Property Name="Numpos" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Line item"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
+                <Property Name="Budat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Posting Date"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Document Type"/>
+                <Property Name="Bldat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Document Date"/>
+                <Property Name="Bktxt" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Doc.Header Text"/>
+                <Property Name="Xblnr" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Reference"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="Bschl" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Posting Key"/>
+                <Property Name="Newko" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="Account"/>
+                <Property Name="Wrbtr" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:label="Amount"/>
+                <Property Name="Zuonr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Assignment"/>
+                <Property Name="Sgtxt" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Text"/>
+                <Property Name="Kostl" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cost Center"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Profit Center"/>
+                <Property Name="MlmatPspnr" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="WBSElem of Inv."/>
+            </EntityType>
+            <EntityType Name="Zf4HelpKostl" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kostl"/>
+                    <PropertyRef Name="Kokrs"/>
+                    <PropertyRef Name="Datbi"/>
+                </Key>
+                <Property Name="Kostl" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cost Center"/>
+                <Property Name="Kokrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="CO Area"/>
+                <Property Name="Datbi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Valid To"/>
+            </EntityType>
+            <EntityType Name="Zf4HelpMlmatPspnr" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Pspnr"/>
+                </Key>
+                <Property Name="Pspnr" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="WBS Element"/>
+            </EntityType>
+            <EntityType Name="Zf4HelpNewko" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Hkont"/>
+                </Key>
+                <Property Name="Hkont" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="Account"/>
+            </EntityType>
+            <EntityType Name="Zf4HelpWaers" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Waers"/>
+                </Key>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="Ltext" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Long Text"/>
+            </EntityType>
+            <EntityContainer Name="ZCRUSCOTTOELEAGOL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="HEADERPOSSet" EntityType="ZCRUSCOTTOELEAGOL_SRV.HEADERPOS" sap:content-version="1"/>
+                <EntitySet Name="Zf4HelpKostlSet" EntityType="ZCRUSCOTTOELEAGOL_SRV.Zf4HelpKostl" sap:content-version="1"/>
+                <EntitySet Name="Zf4HelpMlmatPspnrSet" EntityType="ZCRUSCOTTOELEAGOL_SRV.Zf4HelpMlmatPspnr" sap:content-version="1"/>
+                <EntitySet Name="Zf4HelpNewkoSet" EntityType="ZCRUSCOTTOELEAGOL_SRV.Zf4HelpNewko" sap:content-version="1"/>
+                <EntitySet Name="Zf4HelpWaersSet" EntityType="ZCRUSCOTTOELEAGOL_SRV.Zf4HelpWaers" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://orogeldev:44333/sap/opu/odata/sap/ZCRUSCOTTOELEAGOL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://orogeldev:44333/sap/opu/odata/sap/ZCRUSCOTTOELEAGOL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

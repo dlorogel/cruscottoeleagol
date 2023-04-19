@@ -1,0 +1,169 @@
+<mvc:View controllerName="it.orogel.zcruscottoeleagol.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns="sap.m"
+    xmlns:o="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <Shell id="shell" appWidthLimited="false">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <HBox alignContent="End" alignItems="Center">
+                            <Label text="Società" class="sapUiMediumMarginBeginEnd"/>
+                            <smartField:SmartField id="idSocieta" value="{path: 'Bukrs', mode:'OneWay'}" entitySet="SocietaSet" mandatory="false" class="sapUiMediumMarginBeginEnd">
+                            </smartField:SmartField>
+                        </HBox>
+                        <l:HorizontalLayout >
+                            <Label text="Data ricezione da" labelFor="DataDaInput" class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop"/>
+                            <DatePicker id="DataDaInput" placeholder="" change="DataDaChange" showFooter="false" displayFormat="short" class="sapUiMediumMarginBegin sapUiLargeMarginEnd"/>
+                            <Label text="a" labelFor="DataAInput" class="sapUiLargeMarginBeginEnd sapUiSmallMarginTop"/>
+                            <DatePicker id="DataAInput" placeholder="" change="DataAChange" showFooter="false" displayFormat="short" class="sapUiMediumMarginBegin sapUiLargeMarginEnd"/>
+                            <Button text="{i18n>lbl.Cerca}" type="Emphasized" icon="sap-icon://search" press="onRicerca" class="sapUiLargeMarginBeginEnd"/>
+                        </l:HorizontalLayout>
+                        <OverflowToolbar id="ButtonBar" class="sapUiSmallMarginTop">
+                            <Button text="{i18n>lbl.Seleziona}" type="Emphasized" press="onSeleziona" class="sapUiSmallMarginBegin sapUiLargeMarginEnd"/>
+                            <Button text="{i18n>lbl.SelezionaTutte}" type="Emphasized" press="onSelezionaTutte" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Simulare}" type="Emphasized" press="onSimulare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Modifica}" type="Emphasized" press="onModificare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Salvare}" type="Emphasized" press="onSalvare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Registrare}" type="Emphasized" press="onRegistrare" class="sapUiLargeMarginBeginEnd"/>
+                            <Button text="{i18n>lbl.Declinare}" type="Emphasized" press="onDeclinare" class="sapUiLargeMarginBeginEnd"/>
+                        </OverflowToolbar>
+                        <ScrollContainer vertical="true" horizontal="false">
+                            <t:Table id="AccountingDocument" rows="{appModel>/rows}" selectionMode="None" enableSelectAll="true" visibleRowCountMode="Interactive" ariaLabelledBy="title" alternateRowColors="true" enableCellFilter="true" columnHeaderVisible="true" showNoData="true" fixedColumnCount="3">
+                                <t:columns>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Selected" sortProperty="Selected" width="3em">
+                                        <t:template>
+                                            <!--<Text text="{Selected}" wrapping="false"/>-->
+                                            <CheckBox selected="{Selected}" />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" width="3em">
+                                        <Label text="{i18n>lbl.EsitoTest}"/>
+                                        <t:template>
+                                            <core:Icon src="{ path:'EsitoTest',  formatter: '.formatter.fmIconChange'}" size="2em" color="{=${EsitoTest} === 'Error' ? '#FF0000' : ${EsitoTest} === 'Success' ? '#00FF00' : ${EsitoTest} === 'Declinato' ? '#0000FF' : ''}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Num" sortProperty="Num" width="10em">
+                                        <Label text="{i18n>lbl.Num}"/>
+                                        <t:template>
+                                            <Text text="{Num}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Bukrs" sortProperty="Bukrs" width="10em">
+                                        <Label text="{i18n>lbl.Bukrs}"/>
+                                        <t:template>
+                                            <Text  text ="{Bukrs}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Blart" sortProperty="Blart" width="10em">
+                                        <Label text="{i18n>lbl.Blart}"/>
+                                        <t:template>
+                                            <Text text="{Blart}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Bldat" sortProperty="Bldat" width="10em">
+                                        <Label text="{i18n>lbl.Bldat}"/>
+                                        <t:template>
+                                            <Text text ="{ path:'Bldat',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Budat" sortProperty="Budat" width="10em">
+                                        <Label text="{i18n>lbl.Budat}"/>
+                                        <t:template>
+                                            <Text  text ="{ path:'Budat',  formatter: '.formatter.fmFormatDate'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Bktxt" sortProperty="Bktxt" width="10em">
+                                        <Label text="{i18n>lbl.Bktxt}"/>
+                                        <t:template>
+                                            <Input value="{Bktxt}" editable="{Editable}" submit="onChangeBktxt"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Xblnr" sortProperty="Xblnr" width="10em">
+                                        <Label text="{i18n>lbl.Xblnr}"/>
+                                        <t:template>
+                                            <Input value="{Xblnr}" editable="{Editable}" submit="onChangeXblnr"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Waers" sortProperty="Waers" width="10em">
+                                        <Label text="{i18n>lbl.Waers}"/>
+                                        <t:template>
+                                            <Text text="{Waers}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Bschl" sortProperty="Bschl" width="10em">
+                                        <Label text="{i18n>lbl.Bschl}"/>
+                                        <t:template>
+                                            <Text text="{Bschl}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Mwskz" sortProperty="Mwskz" width="10em">
+                                        <Label text="{i18n>lbl.Mwskz}"/>
+                                        <t:template>
+                                            <Text text="{Mwskz}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Newko" sortProperty="Newko" width="10em">
+                                        <Label text="{i18n>lbl.Newko}"/>
+                                        <t:template>
+                                            <Input value="{Newko}" suggestionItems="{ path: 'appModel>/Newko', sorter: { path: 'Value' } }" valueHelpOnly="false" valueHelpRequest="onNewkoVHRequest" showValueHelp="true" class="customHeightInput" editable="{Editable}" submit="onChangeNewko">
+                                                <core:Item key="{Value}"/>
+                                            </Input>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Wrbtr" sortProperty="Wrbtr" width="10em">
+                                        <Label text="{i18n>lbl.Wrbtr}"/>
+                                        <t:template>
+                                            <Text text="{Wrbtr}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Zuonr" sortProperty="Zuonr" width="10em">
+                                        <Label text="{i18n>lbl.Zuonr}"/>
+                                        <t:template>
+                                            <Input value="{Zuonr}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Sgtxt" sortProperty="Sgtxt" width="10em">
+                                        <Label text="{i18n>lbl.Sgtxt}"/>
+                                        <t:template>
+                                            <Input value="{Sgtxt}" editable="{Editable}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Kostl" sortProperty="Kostl" width="10em">
+                                        <Label text="{i18n>lbl.Kostl}"/>
+                                        <t:template>
+                                            <Text text="{Kostl}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Prctr" sortProperty="Prctr" width="10em">
+                                        <Label text="{i18n>lbl.Prctr}"/>
+                                        <t:template>
+                                            <Text text="{Prctr}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="MlmatPspnr" sortProperty="MlmatPspnr" width="10em">
+                                        <Label text="{i18n>lbl.MlmatPspnr}"/>
+                                        <t:template>
+                                            <Text text="{MlmatPspnr}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column hAlign="Begin" resizable="true" autoResizable="true">
+                                        <Label text="{i18n>lbl.Note}"/>
+                                        <t:template>
+                                            <Button icon="sap-icon://document-text" tooltip="{i18n>lbl.Note}" press="onNote" enabled="{enableNote}"/>
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+                        </ScrollContainer>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
